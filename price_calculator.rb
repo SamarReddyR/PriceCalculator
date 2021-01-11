@@ -29,6 +29,15 @@ class Purchase
     @items.each { |item, quantity| price += sale_price(item, quantity) }
     price.round(2)
   end
+
+  def total_price
+    price = 0
+    @items.each do |item, quantity|
+      item = Product.const_get(item.upcase)
+      price += (item[:unit_price] * quantity)
+    end
+    price.round(2)
+  end
 end
 
 puts "Please enter all the items purchased separated by a comma"
@@ -38,3 +47,5 @@ purchase = Purchase.new(data)
 puts purchase.description
 
 puts "\nTotal price : $#{purchase.total_sale_price}"
+
+puts "\nYou saved $#{(purchase.total_price - purchase.total_sale_price).round(2)} today"
