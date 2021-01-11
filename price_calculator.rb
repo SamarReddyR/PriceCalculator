@@ -23,6 +23,12 @@ class Purchase
     item_sale_price = item[:sale_price] ? item[:sale_price] : item[:unit_price]
     (item_sale_price * (quantity / sale_quantity) + item[:unit_price] * (quantity % sale_quantity)).round(2)
   end
+
+  def total_sale_price
+    price = 0
+    @items.each { |item, quantity| price += sale_price(item, quantity) }
+    price.round(2)
+  end
 end
 
 puts "Please enter all the items purchased separated by a comma"
@@ -30,3 +36,5 @@ data = gets.chomp.split(',').map{ |input| input.strip.capitalize }
 purchase = Purchase.new(data)
 
 puts purchase.description
+
+puts "\nTotal price : $#{purchase.total_sale_price}"
