@@ -13,7 +13,7 @@ class Purchase
 
   def description
     puchase_details = "Item     \tQuantity      Price\n--------------------------------------\n"
-    @items.each { |item, quantity| puchase_details += "#{item}\t\t#{quantity}\t\t#{sale_price(item, quantity)}\n" }
+    @items.each { |item, quantity| puchase_details += "#{item}\t\t#{quantity}\t\t$#{sale_price(item, quantity)}\n" }
     puchase_details
   end
 
